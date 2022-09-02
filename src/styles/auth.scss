@@ -102,7 +102,11 @@
           margin-left: 16px;
         }
       }
-
+      h2 {
+        font-size: 24px ;
+        margin: 56px 0 24px ;
+        font-family: 'Poppins'
+      }
       form {
         input{
           height: 50px;
@@ -118,6 +122,14 @@
 
         button, input {
           width: 100%;
+        }
+      }
+      p {
+        margin-top: 16px;
+        font-size: 14px;
+        color: #737380;
+        a {
+          color: #E559F9;
         }
       }
     }
