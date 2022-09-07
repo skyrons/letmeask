@@ -1,10 +1,10 @@
+import { createContext, useState, useEffect} from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { createContext, useState} from 'react';
 
 import { Home } from "./pages/Home";
 import { NewRoom } from "./pages/NewRoom";
-
 import { auth } from './services/firebase';
+
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 type User = {
@@ -22,6 +22,25 @@ export const AuthContext = createContext({} as AuthContxtType)
 
 function App() {
   const [user, setUser] = useState<User>();
+
+  // Monitora se existia login feito com o usuário anteriormente
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if(user){
+        const { displayName, photoURL, uid } = user
+
+        if(!displayName || !photoURL){
+          throw new Error('Missing information from Google Account');
+        }
+
+        setUser({
+          id:uid,
+          name:displayName,
+          avatar:photoURL
+        })
+      }
+    })
+  }, [])
   
   async function sigInWithGoogle() {
 
