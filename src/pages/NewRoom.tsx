@@ -1,16 +1,15 @@
 import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import { UseAuth } from '../hooks/useAuth';
+import { Link, useNavigate} from 'react-router-dom';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 
 import { Button } from '../components/Button';
+import { database } from '../services/firebase';
+import { ref, set, push } from 'firebase/database';
+import { UseAuth } from '../hooks/useAuth';
 
 import '../styles/auth.scss'
-import { database } from '../services/firebase';
-import { ref, set } from 'firebase/database';
 
 
 
@@ -18,6 +17,7 @@ export function NewRoom() {
 
   const { user } = UseAuth()
   const [ newRoom, setNewRoom ] = useState('');
+  const history = useNavigate()
 
   async function handleCreateRoom(event:FormEvent) {
     event.preventDefault();
@@ -25,12 +25,18 @@ export function NewRoom() {
     if (newRoom.trim() === ''){
       return;
     }
-    const roomRef = database;
 
-    const firebaseRoom = await set(ref(roomRef,'rooms ' + newRoom), {
+    const roomRef = ref(database, 'rooms');
+
+    const firebaseRoom = await push(roomRef);
+    set(firebaseRoom, {
       title: newRoom,
-      authorId:user?.id
+      authorId: user?.id
     })
+    
+    history(`/rooms/${firebaseRoom.key}`)
+    console.log(firebaseRoom.key)
+
   }
 
   return(
