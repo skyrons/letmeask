@@ -25,9 +25,9 @@ export function NewRoom() {
     if (newRoom.trim() === ''){
       return;
     }
-    
     const roomRef = database;
-    set(ref(roomRef,'rooms ' + roomRef), {
+
+    const firebaseRoom = await set(ref(roomRef,'rooms ' + newRoom), {
       title: newRoom,
       authorId:user?.id
     })
