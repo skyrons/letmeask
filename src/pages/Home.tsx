@@ -39,8 +39,8 @@ export function Home() {
 
     const roomRef = await get(ref(database, `rooms/${roomCode}`));
 
-    if(!roomRef.exists()){
-      alert('This room does not exist');
+    if(!roomRef.exists()) {
+      alert('Room does not exists');
       return;
     }
 
