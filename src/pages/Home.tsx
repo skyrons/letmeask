@@ -1,15 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-
-import { UseAuth } from '../hooks/useAuth';
-
 import { FormEvent, useState } from 'react';
 
-import { get, ref } from 'firebase/database';
-import { database } from '../services/firebase';
+import { UseAuth } from '../hooks/useAuth';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
+
+import { get, ref } from 'firebase/database';
+import { database } from '../services/firebase';
 
 import { Button } from '../components/Button';
 
