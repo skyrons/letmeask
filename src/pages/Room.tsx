@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import logoImg from '../assets/images/logo.svg';
@@ -8,11 +8,11 @@ import { Roomcode } from '../components/RoomCode';
 import { UseAuth } from '../hooks/useAuth';
 
 import { database } from '../services/firebase';
-import { ref, set, push, onChildAdded, onValue } from 'firebase/database';
+import { ref, set, push, onValue} from 'firebase/database';
 
 import '../styles/room.scss';
-import { ScriptSnapshot } from 'typescript';
-import { snapshotEqual } from 'firebase/firestore/lite';
+import { Link } from 'react-router-dom';
+
 
 type RoomParams = {
   id: string;
@@ -24,6 +24,14 @@ export function Room() {
   const [ newQuestion, setNewQuestion ] = useState('');
 
   const roomId = params.id;
+
+  useEffect(() => {
+    const roomRef = ref(database,`rooms/${roomId}`);
+    onValue(roomRef, room => {
+      console.log(room.val())
+    })
+
+  }, [roomId])
 
   async function handleSendQuestion(event:FormEvent) {
     event.preventDefault();
