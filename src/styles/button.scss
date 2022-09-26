@@ -14,6 +14,12 @@
   border: 0;
   transition: filter 0.2;
   
+  &.outlined {
+    background: #FFF;
+    border: 1px solid #835AFD;
+    color: #835AFD;
+  }
+
   &:not(:disabled):hover {
     filter: brightness(0.9);
   }
