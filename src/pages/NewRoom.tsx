@@ -34,7 +34,7 @@ export function NewRoom() {
       authorId: user?.id
     })
     
-    history(`/rooms/${firebaseRoom.key}`)
+    history(`/Admin/rooms/${firebaseRoom.key}`)
     console.log(firebaseRoom.key)
 
   }

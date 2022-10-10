@@ -37,7 +37,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         setUser({
           id:uid,
           name:displayName,
-          avatar:photoURL
+          avatar:photoURL,
         })
       }
     })
@@ -63,8 +63,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       setUser({
         id:uid,
         name:displayName,
-        avatar:photoURL
-      })
+        avatar:photoURL,
+      });
     }
   }
 
