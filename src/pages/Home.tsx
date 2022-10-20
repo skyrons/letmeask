@@ -48,6 +48,15 @@ export function Home() {
       return;
     }
 
+    const authorRef = await ref(database, `rooms/${roomCode}/authorId`);
+    onValue(authorRef, authorId => {
+      const author = authorId.val();
+      if(author == user?.id){
+        history(`/Admin/rooms/${roomCode}`);
+      }
+    })
+    
+
     history(`/rooms/${roomCode}`);
     
   }
