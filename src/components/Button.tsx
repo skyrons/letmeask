@@ -3,6 +3,7 @@ import '../styles/button.scss'
 
 type ButtonProps = ButtonHTMLAttributes <HTMLButtonElement> & {
  isOutlined?: boolean;
+ isHome?: boolean;
 }
 
 export function Button({isOutlined = false, ...props}: ButtonProps){

@@ -25,6 +25,10 @@ export function AdminRoom() {
   const { title, questions } = useRoom(roomId)
   const history = useNavigate()
 
+  function handleSwithHome(){
+    history('/');
+  }
+
   async function handleCloseRoom() {
     await update(ref(database, `rooms/${roomId}`), {
       closedAt: new Date(),
@@ -56,7 +60,12 @@ export function AdminRoom() {
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logoImg} alt="" />
+          <button className='home'
+                  onClick={handleSwithHome}>
+            <img src={logoImg} 
+                 alt=""
+            />
+          </button>
           <div>
             <Roomcode code={roomId}/>
             <Button 

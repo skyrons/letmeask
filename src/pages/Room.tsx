@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRoom } from '../hooks/useRoom';
 import { UseAuth } from '../hooks/useAuth';
 
@@ -21,6 +21,7 @@ export function Room() {
   const params : any = useParams<RoomParams>();
   const [ newQuestion, setNewQuestion ] = useState('');
   const roomId = params.id;
+  const history = useNavigate()
   
   const { title, questions } = useRoom(roomId)  
 
@@ -65,11 +66,18 @@ export function Room() {
     await sigInWithGoogle();
   }
 
+  function handleSwithHome(){
+    history('/');
+  }
   return (
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logoImg} alt="" />
+          <button className='home'
+                  onClick={handleSwithHome}>
+            <img src={logoImg} alt=""
+            />
+          </button>
           <Roomcode code={roomId}/>
         </div>
       </header>

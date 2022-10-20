@@ -34,7 +34,6 @@ export function useRoom(roomId: string) {
   const { user } = UseAuth();
   const [ title, setTitle ] = useState('')
 
-
   useEffect(() => {
     const roomRef = ref(database,`rooms/${roomId}`);
     onValue(roomRef, room => {
